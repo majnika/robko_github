@@ -8,9 +8,6 @@ server_addr = ("127.0.0.1", 12345)
 while True:
     message = input("Zadaj spravu: ")
 
-    if message == "END":
-        break
-
     max_data_len = int(input("Zadaj max dlzku dat: "))
     message = message + "&"
 
@@ -26,3 +23,6 @@ while True:
                 break
     else:
         sock.sendto(message.encode("utf-8"), server_addr)
+
+    if "#" in message:
+        break
