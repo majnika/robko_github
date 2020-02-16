@@ -6,6 +6,7 @@ addr = ("0.0.0.0", 12345)
 
 sock.bind(addr)
 
+
 message = []
 
 while True:
@@ -15,10 +16,18 @@ while True:
 
     message.append(mesage_bytes.decode("utf-8"))
     
+
     if mesage_bytes == b'&':
         #print("Hit botka")
-        message = message[:-1]
-        print("".join(message))
-        message = []
+        message.pop(len(message) - 1)
+    
+        if "#" in message:
+            message.pop(len(message) - 1)
+            print("".join(message))
+            print("Connection closed by a foreign host")
+            break
+        else:
+            print("".join(message))
+            message = []
 
 sock.close()
